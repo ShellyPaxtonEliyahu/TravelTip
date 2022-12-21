@@ -14,8 +14,6 @@ function onLocInit() {
     locService.getLocs()
         .then(locs => {
             console.log('locs control', locs)
-            // if (!locs.length) return
-            // renderVideos(videos)
             renderPlaceList(locs)
         })
 }
@@ -24,12 +22,10 @@ function onLocInit() {
 
 function renderPlaceList(locs) {
     const strHTML = locs.map(loc =>
-        //  {id, name,lat, lng, weather, createdAt, updatedAt } = loc
         `
     <article data-list-id="${loc.id}" class="list-item" >
         <span class="list-title">${loc.name}</span>
         <span class="list-time">${loc.createdAt}</span>
-        
         <button onclick="onLocGo(${loc.lat},${loc.lng})" class="btn-go">Go</button>
         <button onclick="onDelete('${loc.id}')" class="btn-del">Delete</button>
         
@@ -40,9 +36,10 @@ function renderPlaceList(locs) {
 
 }
 
-function onDelete(locId){
+function onDelete(locId) {
     console.log('remove', locId)
     locService.remove(locId)
+    onLocInit()
 }
 
 function onLocGo(lat, lng) {

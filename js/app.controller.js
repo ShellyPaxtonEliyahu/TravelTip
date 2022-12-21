@@ -23,8 +23,8 @@ function onInit() {
 }
 
 
-function renderMap() {
-
+function onShowMyPlace(){
+    
 }
 
 // This function provides a Promise API to the callback-based-api of getCurrentPosition
