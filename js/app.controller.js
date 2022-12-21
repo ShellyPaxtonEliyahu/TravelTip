@@ -5,11 +5,13 @@ import { locController } from './loc.controller.js'
 export const appController = {
     onPanTo
 }
+
 window.onload = onInit
 window.onAddMarker = onAddMarker
 window.onPanTo = onPanTo
 window.onGetLocs = onGetLocs
 window.onGetUserPos = onGetUserPos
+window.getPosition = getPosition
 
 function onInit() {
     mapService.initMap()
@@ -17,23 +19,34 @@ function onInit() {
             // console.log('Map is ready')
         })
         .catch(() => console.log('Error: cannot init map'))
-    // mapService.addMapListener()
-
     locController.onLocInit()
 }
 
 
-function onShowMyPlace(){
+// function onShowMyPlace(){
     
-}
+// }
 
 // This function provides a Promise API to the callback-based-api of getCurrentPosition
+// function getPosition() {
+//     console.log('Getting Pos')
+//     return new Promise((resolve, reject) => {
+//         navigator.geolocation.getCurrentPosition(resolve, reject)
+//     })
+// }
+
 function getPosition() {
     console.log('Getting Pos')
     return new Promise((resolve, reject) => {
-        navigator.geolocation.getCurrentPosition(resolve, reject)
+        navigator.geolocation.getCurrentPosition(function (position) {
+            let latitude = position.coords.latitude
+            let longitude = position.coords.longitude
+            fetch(`https://maps.googleapis.com/maps/api/geocode/json?latlng=${latitude},${longitude}`)
+                .then(response => response.json())
+        })
     })
 }
+
 
 function onAddMarker() {
     console.log('Adding a marker')
