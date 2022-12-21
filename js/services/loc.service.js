@@ -2,29 +2,13 @@ import { storageService } from './storage.service.js'
 
 export const locService = {
     getLocs,
-    remove,
-    getLocation
+    remove
 }
 
 const KEY = 'locDB'
 var gCounterId = 1
 var gLocs 
 _createLocs()
-
-
-function getLocation() {
-    if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(showPosition)
-    } else {
-      x.innerHTML = "Geolocation is not supported by this browser."
-    }
-  }
-  
-  function showPosition(position) {
-    
-    x.innerHTML = "Latitude: " + position.coords.latitude +
-    "<br>Longitude: " + position.coords.longitude
-  }
 
 function getLocs() {
     return new Promise((resolve, reject) => {

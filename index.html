@@ -9,10 +9,15 @@
 </head>
 
 <body>
-    <h1>TravelTip Starter</h1>
+    <h1>Travel Tip </h1>
     <div class="my-place-container">
-        <button class="btn-my-place" onclick="getPosition()"> my-place</button>
-        <
+        <button class="btn-my-place" onclick="onGetUserPos()"> my-place</button>
+
+    </div>
+
+    <div class="search-container">
+        <input type="text" class="search-input" placeholder="enter a city">
+        <button class="btn-search" onclick="onSearchLoc()">🔍</button>
     </div>
 
     <div class="map-container">
@@ -20,9 +25,8 @@
     </div>
 
     <div class="places-container"> </div>
-    
+
     <button onclick="onAddMarker()" class="btn-add-marker">Add Marker Speific Location</button>
-    <button onclick="onGetUserPos()" class="btn-user-pos">Get User Position</button>
     <button onclick="onGetLocs()" class="btn-get-locs">Get Locations</button>
     <button onclick="onPanTo()" class="btn-pan">Pan Map to Tokyo</button>
 
@@ -30,7 +34,6 @@
     <p>Locations:
     <pre class="locs"></pre>
     </p>
-
 
     <script type="module" src="js/app.controller.js"></script>
 </body>

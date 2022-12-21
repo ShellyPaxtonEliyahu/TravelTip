@@ -1,5 +1,44 @@
-
-
-.places-container{
-    background-color: #277b7b;
+/* header */
+h1 {
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif, Times, serif;
+    font-size: 3em;
+    color:#277b7b;
+    text-align: center;
+    
 }
+
+
+/* basic */
+body{
+    background-color: rgb(222, 236, 236);
+}
+
+button{
+    border-radius: 6px;
+    border-color: antiquewhite;
+    height: 35px;
+    background-color: rgb(230, 218, 203);
+}
+button:hover{
+    cursor: pointer;
+    background-color: rgb(230, 218, 203);
+}
+
+.places-container {
+    background-color: rgb(173, 201, 201);
+    width: 60%;
+
+    text-align: center;
+
+    border-radius: 6px;
+    border-color: antiquewhite;
+
+}
+
+.map-container{
+    width: 70%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+

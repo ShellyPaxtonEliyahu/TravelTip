@@ -11,7 +11,7 @@ window.onAddMarker = onAddMarker
 window.onPanTo = onPanTo
 window.onGetLocs = onGetLocs
 window.onGetUserPos = onGetUserPos
-window.getPosition = getPosition
+window.onSearchLoc = onSearchLoc
 
 function onInit() {
     mapService.initMap()
@@ -22,35 +22,16 @@ function onInit() {
     locController.onLocInit()
 }
 
-
-// function onShowMyPlace(){
-    
-// }
-
-// This function provides a Promise API to the callback-based-api of getCurrentPosition
-// function getPosition() {
-//     console.log('Getting Pos')
-//     return new Promise((resolve, reject) => {
-//         navigator.geolocation.getCurrentPosition(resolve, reject)
-//     })
-// }
-
 function getPosition() {
     console.log('Getting Pos')
     return new Promise((resolve, reject) => {
-        navigator.geolocation.getCurrentPosition(function (position) {
-            let latitude = position.coords.latitude
-            let longitude = position.coords.longitude
-            fetch(`https://maps.googleapis.com/maps/api/geocode/json?latlng=${latitude},${longitude}`)
-                .then(response => response.json())
-        })
+        navigator.geolocation.getCurrentPosition(resolve, reject)
     })
 }
 
-
-function onAddMarker() {
+function onAddMarker(lat = 32.0749831, lng = 34.9120554) {
     console.log('Adding a marker')
-    mapService.addMarker({ lat: 32.0749831, lng: 34.9120554 })
+    mapService.addMarker({ lat, lng })
 }
 
 function onGetLocs() {
@@ -67,13 +48,21 @@ function onGetUserPos() {
             console.log('User position is:', pos.coords)
             document.querySelector('.user-pos').innerText =
                 `Latitude: ${pos.coords.latitude} - Longitude: ${pos.coords.longitude}`
+            onPanTo(pos.coords.latitude, pos.coords.longitude)
         })
         .catch(err => {
             console.log('err!!!', err)
         })
 }
 
-function onPanTo(lat, lng) {
+function onPanTo(lat = 35.6895, lng = 139.6917) {
     console.log('Panning the Map')
     mapService.panTo(lat, lng)
+
+    onAddMarker(lat, lng)
+}
+
+function onSearchLoc() {
+    var elTxt = document.querySelector('.search-input').value
+    console.log(elTxt)
 }

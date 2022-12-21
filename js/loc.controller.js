@@ -10,15 +10,12 @@ window.onLocGo = onLocGo
 window.onDelete = onDelete
 
 function onLocInit() {
-
     locService.getLocs()
         .then(locs => {
             console.log('locs control', locs)
             renderPlaceList(locs)
         })
 }
-
-
 
 function renderPlaceList(locs) {
     const strHTML = locs.map(loc =>
@@ -32,8 +29,6 @@ function renderPlaceList(locs) {
         </article>`)
     const elSavedContainer = document.querySelector('.places-container')
     elSavedContainer.innerHTML = strHTML.join('')
-
-
 }
 
 function onDelete(locId) {
