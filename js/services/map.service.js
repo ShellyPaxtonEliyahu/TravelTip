@@ -1,7 +1,8 @@
 export const mapService = {
     initMap,
     addMarker,
-    panTo
+    panTo,
+    // addMapListener
 }
 
 
@@ -10,7 +11,7 @@ var gMap
 
 function initMap(lat = 32.0749831, lng = 34.9120554) {
     console.log('InitMap')
-    addListener()
+
     return _connectGoogleApi()
         .then(() => {
             console.log('google available')
@@ -20,23 +21,29 @@ function initMap(lat = 32.0749831, lng = 34.9120554) {
                 zoom: 15
             })
             console.log('Map!', gMap)
+
+            let infoWindow = new google.maps.InfoWindow({
+                content: "Click",
+                position: gMap.center,
+            })
+            infoWindow.open(gMap)
+            gMap.addListener('click', (ev) => {
+                infoWindow.close()
+
+                infoWindow = new google.maps.InfoWindow({
+                    position: ev.latLng,
+                })
+
+                infoWindow.setContent(
+                    JSON.stringify(ev.latLng.toJSON(), null, 2)
+                )
+                infoWindow.open(gMap)
+            }
+            )
         })
-
 }
 
-function addListener() {
-    // Configure the click listener.
-    gMap.addListener('click', (mapsMouseEvent))
-}
 
-function mapsMouseEvent(){
-    // Close the current InfoWindow.
-    infoWindow.close();
-    // Create a new InfoWindow.
-    infoWindow = new google.maps.InfoWindow({
-      position: mapsMouseEvent.latLng,
-    });
-}
 
 function addMarker(loc) {
     var marker = new google.maps.Marker({
@@ -51,7 +58,6 @@ function panTo(lat, lng) {
     var laLatLng = new google.maps.LatLng(lat, lng)
     gMap.panTo(laLatLng)
 }
-
 
 function _connectGoogleApi() {
     if (window.google) return Promise.resolve()
