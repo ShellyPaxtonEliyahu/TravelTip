@@ -10,6 +10,7 @@ var gMap
 
 function initMap(lat = 32.0749831, lng = 34.9120554) {
     console.log('InitMap')
+    addListener()
     return _connectGoogleApi()
         .then(() => {
             console.log('google available')
@@ -20,6 +21,21 @@ function initMap(lat = 32.0749831, lng = 34.9120554) {
             })
             console.log('Map!', gMap)
         })
+
+}
+
+function addListener() {
+    // Configure the click listener.
+    gMap.addListener('click', (mapsMouseEvent))
+}
+
+function mapsMouseEvent(){
+    // Close the current InfoWindow.
+    infoWindow.close();
+    // Create a new InfoWindow.
+    infoWindow = new google.maps.InfoWindow({
+      position: mapsMouseEvent.latLng,
+    });
 }
 
 function addMarker(loc) {
