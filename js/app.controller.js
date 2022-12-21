@@ -2,6 +2,9 @@ import { locService } from './services/loc.service.js'
 import { mapService } from './services/map.service.js'
 import { locController } from './loc.controller.js'
 
+export const appController = {
+    onPanTo
+}
 window.onload = onInit
 window.onAddMarker = onAddMarker
 window.onPanTo = onPanTo
@@ -56,7 +59,8 @@ function onGetUserPos() {
             console.log('err!!!', err)
         })
 }
-function onPanTo() {
+
+function onPanTo(lat, lng) {
     console.log('Panning the Map')
-    mapService.panTo(35.6895, 139.6917)
+    mapService.panTo(lat, lng)
 }

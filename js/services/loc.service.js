@@ -1,6 +1,8 @@
 import {storageService} from './storage.service.js'
+
 export const locService = {
-    getLocs
+    getLocs,
+    remove
 }
 
 const KEY = 'locDB'
@@ -15,6 +17,11 @@ function getLocs() {
          }, 0)
     })
 }
+
+function remove(locId) {
+    return storageService.remove(KEY, locId)
+}
+
 
 function _createLocs() {
     console.log('locs from _createLocs')
